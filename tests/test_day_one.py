@@ -6,11 +6,11 @@ Created on Tue Dec  1 16:58:55 2020
 @author: andrewblance
 """
 
-import advent_of_code.dayone as one
+from advent_of_code.dayone import DayOne
 
 
 class TestDayOne:
-    def test_one_adder_actually_adds(self):
-        x = 1
-        y = 2
-        assert one.adder(x, y) == 3
+    def test_two_factors(self):
+        L = [1, 5, 20000, 1009, 1011, 2]
+        factors = DayOne().find_two_factors(L)
+        assert factors == 1020099

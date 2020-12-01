@@ -19,6 +19,7 @@ test: venv
 run: venv
 	flake8 --exclude=venv
 	pytest --ignore=venv
+	python advent_of_code/dayone.py
 
 
 clean:
