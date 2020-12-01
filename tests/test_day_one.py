@@ -13,4 +13,4 @@ class TestDayOne:
     def test_one_adder_actually_adds(self):
         x = 1
         y = 2
-        assert one.adder(x, y) == 6
+        assert one.adder(x, y) == 3
