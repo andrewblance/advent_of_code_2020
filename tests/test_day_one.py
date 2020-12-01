@@ -14,3 +14,8 @@ class TestDayOne:
         L = [1, 5, 20000, 1009, 1011, 2]
         factors = DayOne().find_two_factors(L)
         assert factors == 1020099
+
+    def test_three_factors(self):
+        L = [1, 5, 20000, 1009, 1010]
+        factors = DayOne().find_three_factors(L)
+        assert factors == 1019090
