@@ -7,14 +7,72 @@ Created on Tue Dec  1 17:33:54 2020
 """
 
 
+import re
+from typing import Iterable
+from dataclasses import dataclass
+
+
 def import_expense_report(loc):
     data = open(loc).read().split()
     data = [int(x) for x in data]
     return data
 
 
+class DayTwo:
+    def import_passwords(self, loc):
+        data = open(loc).read()
+        data = data.rstrip().split("\n")
+        data = [self.regex_clean(x) for x in data]
+        data = [password(int(x[0]), int(x[1]), x[2], x[3]) for x in data]
+        return data
+
+    def regex_clean(self, data: str) -> Iterable[str]:
+        split_data = re.split(r"[, \-:]+", data)
+        return split_data
+
+    def password_check(self, data: Iterable) -> int:
+        """
+        the old companies version
+        """
+        real = 0
+        for x in data:
+            pw = x.password
+            rl = x.rule
+            occurences = len(pw) - len(pw.replace(rl, ""))
+            if (x.upper >= occurences) & (x.lower <= occurences):
+                real += 1
+        return real
+
+    def password_check_toboggan(self, data: Iterable) -> int:
+        real = 0
+        for x in data:
+            pw = x.password
+            rl = x.rule
+            upper_char = pw[x.upper - 1]
+            lower_char = pw[x.lower - 1]
+            if (upper_char == rl) & (lower_char == rl):
+                continue
+            if (upper_char == rl) or (lower_char == rl):
+                real += 1
+        return real
+
+    def answers(self, data):
+        correct_pw = self.password_check(data)
+        toboggan_pw = self.password_check_toboggan(data)
+        print("The number of 'correct' passwords is: " + str(correct_pw) +
+              "...well actually, the correct answer is " + str(toboggan_pw))
+
+
+@dataclass
+class password:
+    lower: int
+    upper: int
+    rule: str
+    password: str
+
+
 class DayOne:
-    def find_two_factors(self, L):
+    def find_two_factors(self, L: Iterable) -> float:
         """
         given a list, find the two nums that sum to 2020
         what is their product?
@@ -24,7 +82,7 @@ class DayOne:
         product = factors[0] * factors[1]
         return product
 
-    def find_three_factors(self, L):
+    def find_three_factors(self, L: Iterable) -> float:
         """
         given a list, find the three nums that sum to 2020
         what is their product?
@@ -44,8 +102,11 @@ class DayOne:
 
 
 def main():
-    data = import_expense_report("advent_of_code/data/input.txt")
-    DayOne().answers(data)
+    expenses = import_expense_report("advent_of_code/data/input.txt")
+    DayOne().answers(expenses)
+
+    passwords = DayTwo().import_passwords("advent_of_code/data/passwords.txt")
+    DayTwo().answers(passwords)
 
 
 if __name__ == '__main__':
