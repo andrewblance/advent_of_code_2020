@@ -8,29 +8,41 @@ Created on Tue Dec  1 17:33:54 2020
 
 
 import re
-from typing import Iterable
+from typing import List
 from dataclasses import dataclass
 
 
-def import_expense_report(loc):
+def import_expense_report(loc: str) -> List[int]:
+    """
+    import txt
+
+    Parameters
+    ----------
+    loc
+        location of file
+
+    """
     data = open(loc).read().split()
-    data = [int(x) for x in data]
-    return data
+    expense = [int(x) for x in data]
+    return expense
 
 
 class DayTwo:
-    def import_passwords(self, loc):
+    def import_passwords(self, loc: str) -> List['password']:
+        """
+        import passwords
+        """
         data = open(loc).read()
-        data = data.rstrip().split("\n")
-        data = [self.regex_clean(x) for x in data]
-        data = [password(int(x[0]), int(x[1]), x[2], x[3]) for x in data]
-        return data
+        stripped = data.rstrip().split("\n")
+        clean = [self.regex_clean(x) for x in stripped]
+        pw = [password(int(x[0]), int(x[1]), x[2], x[3]) for x in clean]
+        return pw
 
-    def regex_clean(self, data: str) -> Iterable[str]:
+    def regex_clean(self, data: str) -> List[str]:
         split_data = re.split(r"[, \-:]+", data)
         return split_data
 
-    def password_check(self, data: Iterable) -> int:
+    def password_check(self, data: List['password']) -> int:
         real = 0
         for x in data:
             pw = x.password
@@ -40,7 +52,7 @@ class DayTwo:
                 real += 1
         return real
 
-    def password_check_toboggan(self, data: Iterable) -> int:
+    def password_check_toboggan(self, data: List['password']) -> int:
         real = 0
         for x in data:
             pw = x.password
@@ -53,7 +65,7 @@ class DayTwo:
                 real += 1
         return real
 
-    def answers(self, data):
+    def answers(self, data: List['password']):
         correct_pw = self.password_check(data)
         toboggan_pw = self.password_check_toboggan(data)
         print("The number of 'correct' passwords is: " + str(correct_pw) +
@@ -69,7 +81,7 @@ class password:
 
 
 class DayOne:
-    def find_two_factors(self, L: Iterable) -> float:
+    def find_two_factors(self, L: List[int]) -> float:
         """
         given a list, find the two nums that sum to 2020
         what is their product?
@@ -79,7 +91,7 @@ class DayOne:
         product = factors[0] * factors[1]
         return product
 
-    def find_three_factors(self, L: Iterable) -> float:
+    def find_three_factors(self, L: List[int]) -> float:
         """
         given a list, find the three nums that sum to 2020
         what is their product?
@@ -91,7 +103,7 @@ class DayOne:
         product = factors[0] * factors[1] * factors[2]
         return product
 
-    def answers(self, L):
+    def answers(self, L: List[int]):
         two_factors = self.find_two_factors(L)
         three_factors = self.find_three_factors(L)
         print("The answers for day one are: " +

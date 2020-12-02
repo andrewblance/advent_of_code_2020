@@ -1,3 +1,5 @@
+.ONESHELL:
+
 # define the name of the virtual environment directory
 VENV := venv
 
@@ -11,21 +13,27 @@ $(VENV)/bin/activate: requirements.txt
 venv: $(VENV)/bin/activate
 
 lint: venv
-	flake8 --exclude=venv
+	./$(VENV)/bin/python3 -m flake8 --exclude=venv,docs
 
 mypy: venv
-	mypy advent_of_code/dayone.py
+	./$(VENV)/bin/python3 -m mypy advent_of_code
 
 test: venv
-	pytest --ignore=venv
+	./$(VENV)/bin/python3 -m pytest --ignore=venv,docs
+
+sphinx: venv
+	make html -C ./docs
 
 run: venv
-	flake8 --exclude=venv
-	pytest --ignore=venv
-	mypy advent_of_code/dayone.py
-	python advent_of_code/dayone.py
+	./$(VENV)/bin/python3 -m flake8 --exclude=venv,docs
+	./$(VENV)/bin/python3 -m pytest --ignore=venv,docs
+	./$(VENV)/bin/python3 -m mypy advent_of_code
+	make html -C ./docs
+	./$(VENV)/bin/python3 advent_of_code/dayone.py
 
 
 clean:
+	make clean -C ./docs
 	rm -rf $(VENV)
 	find . -type f -name '*.pyc' -delete
+

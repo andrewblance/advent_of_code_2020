@@ -1,3 +1,6 @@
 pytest
 flake8
 mypy
+sphinx
+sphinx-autodoc-typehints
+dataclasses
