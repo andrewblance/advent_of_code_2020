@@ -31,14 +31,11 @@ class DayTwo:
         return split_data
 
     def password_check(self, data: Iterable) -> int:
-        """
-        the old companies version
-        """
         real = 0
         for x in data:
             pw = x.password
             rl = x.rule
-            occurences = len(pw) - len(pw.replace(rl, ""))
+            occurences = pw.count(rl)
             if (x.upper >= occurences) & (x.lower <= occurences):
                 real += 1
         return real
