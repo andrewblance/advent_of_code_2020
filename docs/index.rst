@@ -3,7 +3,7 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to Advent of Code's documentation!
+Advent of Code
 ==========================================
 
 This is documention automatically generated using sphinx.
@@ -12,19 +12,25 @@ Look, a list:
 
  * Item one
 
-.. automodule:: src.weekone
-    :members:
-    :undoc-members:
-
+Documentation for the Code
+==========================
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
 
+Codes pretty fun, right?
 
+Week One Code
+*************
+.. autoclass:: src.weekone.DayThree
+    :members:
+.. autoclass:: src.weekone.DayTwo
+    :members:
+.. autoclass:: src.weekone.DayOne
+    :members:
 
 Indices and tables
-==================
-
+******************
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
