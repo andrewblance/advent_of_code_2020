@@ -185,13 +185,13 @@ class DayOne:
 
 
 def main():
-    expenses = DayOne().import_expense_report("advent_of_code/data/input.txt")
+    expenses = DayOne().import_expense_report("src/data/input.txt")
     DayOne().answers(expenses)
 
-    passwords = DayTwo().import_passwords("advent_of_code/data/passwords.txt")
+    passwords = DayTwo().import_passwords("src/data/passwords.txt")
     DayTwo().answers(passwords)
 
-    maps = DayThree().import_map("advent_of_code/data/map.txt")
+    maps = DayThree().import_map("src/data/map.txt")
     DayThree().answers(maps)
 
 

@@ -12,7 +12,7 @@ Look, a list:
 
  * Item one
 
-.. automodule:: advent_of_code.dayone
+.. automodule:: src.weekone
     :members:
     :undoc-members:
 
