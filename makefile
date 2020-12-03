@@ -24,6 +24,13 @@ test: venv
 sphinx: venv
 	make html -C ./docs
 
+# small run, only runs tests
+small_run: venv
+	./$(VENV)/bin/python3 -m pytest --ignore=venv,docs
+	./$(VENV)/bin/python3 advent_of_code/dayone.py
+
+# this is the full run
+# what you should use to do everything
 run: venv
 	./$(VENV)/bin/python3 -m flake8 --exclude=venv,docs
 	./$(VENV)/bin/python3 -m pytest --ignore=venv,docs

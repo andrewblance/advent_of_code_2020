@@ -4,6 +4,7 @@ Advent Of Code, but really a chance to look at using:
  * PyTest
  * mypy
  * flake8
+
 These all run check whenever the project is pushed using GitHub Actions.
 
 

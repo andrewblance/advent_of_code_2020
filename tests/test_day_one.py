@@ -6,7 +6,28 @@ Created on Tue Dec  1 16:58:55 2020
 @author: andrewblance
 """
 
-from advent_of_code.dayone import DayOne, DayTwo, password
+from advent_of_code.dayone import DayOne, DayTwo, DayThree, password
+
+
+class TestDayThree:
+    def test_stepper(self):
+        x_init = 4
+        y_init = 10
+        x_step = 1
+        y_step = 5
+        map_width = 11
+        coords = DayThree().stepper(x_init, y_init,
+                                    x_step, y_step, map_width)
+        assert (coords[0] == 5) & (coords[1] == 4)
+
+    def test_traverse(self):
+        maps = ['....#', '..#..', '....#', '.#...']
+        x = 0
+        y = 0
+        x_step = 1
+        y_step = 2
+        trees = DayThree().traverse(x, y, x_step, y_step, maps)
+        assert trees == 3
 
 
 class TestDayOne:
