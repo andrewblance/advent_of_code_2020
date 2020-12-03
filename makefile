@@ -16,7 +16,7 @@ lint: venv
 	./$(VENV)/bin/python3 -m flake8 --exclude=venv,docs
 
 mypy: venv
-	./$(VENV)/bin/python3 -m mypy advent_of_code
+	./$(VENV)/bin/python3 -m mypy src
 
 test: venv
 	./$(VENV)/bin/python3 -m pytest --ignore=venv,docs
@@ -27,16 +27,16 @@ sphinx: venv
 # small run, only runs tests
 small_run: venv
 	./$(VENV)/bin/python3 -m pytest --ignore=venv,docs
-	./$(VENV)/bin/python3 advent_of_code/dayone.py
+	./$(VENV)/bin/python3 src/weekone.py
 
 # this is the full run
 # what you should use to do everything
 run: venv
 	./$(VENV)/bin/python3 -m flake8 --exclude=venv,docs
 	./$(VENV)/bin/python3 -m pytest --ignore=venv,docs
-	./$(VENV)/bin/python3 -m mypy advent_of_code
+	./$(VENV)/bin/python3 -m mypy src
 	make html -C ./docs
-	./$(VENV)/bin/python3 advent_of_code/dayone.py
+	./$(VENV)/bin/python3 src/weekone.py
 
 
 clean:

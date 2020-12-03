@@ -29,4 +29,4 @@ jobs:
         pytest --ignore=docs
     - name: Check code types with mypy
       run: |
-        mypy advent_of_code
+        mypy src

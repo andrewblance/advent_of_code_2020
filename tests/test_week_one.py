@@ -6,7 +6,7 @@ Created on Tue Dec  1 16:58:55 2020
 @author: andrewblance
 """
 
-from advent_of_code.dayone import DayOne, DayTwo, DayThree, password
+import src.weekone as w1
 
 
 class TestDayThree:
@@ -16,8 +16,8 @@ class TestDayThree:
         x_step = 1
         y_step = 5
         map_width = 11
-        coords = DayThree().stepper(x_init, y_init,
-                                    x_step, y_step, map_width)
+        coords = w1.DayThree().stepper(x_init, y_init,
+                                       x_step, y_step, map_width)
         assert (coords[0] == 5) & (coords[1] == 4)
 
     def test_traverse(self):
@@ -26,37 +26,37 @@ class TestDayThree:
         y = 0
         x_step = 1
         y_step = 2
-        trees = DayThree().traverse(x, y, x_step, y_step, maps)
+        trees = w1.DayThree().traverse(x, y, x_step, y_step, maps)
         assert trees == 3
 
 
 class TestDayOne:
     def test_two_factors(self):
         L = [1, 5, 20000, 1009, 1011, 2]
-        factors = DayOne().find_two_factors(L)
+        factors = w1.DayOne().find_two_factors(L)
         assert factors == 1020099
 
     def test_three_factors(self):
         L = [1, 5, 20000, 1009, 1010]
-        factors = DayOne().find_three_factors(L)
+        factors = w1.DayOne().find_three_factors(L)
         assert factors == 1019090
 
 
 class TestDayTwo:
     def test_regex(self):
         L = '1-44 d: asdwer'
-        bits = DayTwo().regex_clean(L)
+        bits = w1.DayTwo().regex_clean(L)
         assert (bits[0] == "1") & \
                (bits[1] == "44") & \
                (bits[2] == "d") & \
                (bits[3] == "asdwer")
 
     def test_password_check(self):
-        L = [password(1, 10, "a", "aadd"), password(5, 6, "c", "cca")]
-        bits = DayTwo().password_check(L)
+        L = [w1.password(1, 10, "a", "aadd"), w1.password(5, 6, "c", "cca")]
+        bits = w1.DayTwo().password_check(L)
         assert bits == 1
 
     def test_toboggan_password_check(self):
-        L = [password(1, 4, "a", "aadd"), password(1, 2, "c", "cca")]
-        bits = DayTwo().password_check_toboggan(L)
+        L = [w1.password(1, 4, "a", "aadd"), w1.password(1, 2, "c", "cca")]
+        bits = w1.DayTwo().password_check_toboggan(L)
         assert bits == 1
