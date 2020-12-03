@@ -7,7 +7,7 @@ Created on Tue Dec  1 17:33:54 2020
 """
 
 import re
-from typing import List
+from typing import List, Tuple
 from dataclasses import dataclass
 
 
@@ -32,17 +32,17 @@ class DayThree:
     once we get to the end of a string we start back at the
     beginning of it again
     """
-    def import_map(self, loc: str) -> List:
+    def import_map(self, loc: str) -> List[str]:
         data = open(loc).read()
         maps = data.rstrip().split("\n")
         return maps
 
     def stepper(self, x_init: int, y_init: int,
                 x_step: int, y_step: int,
-                map_width: int) -> List[int]:
+                map_width: int) -> Tuple[int, int]:
         """
         Given a set of coordinates,
-        move your way accross a repearing gridspace
+        move your way across a repeating gridspace
 
         Parameters
         ----------
@@ -65,11 +65,11 @@ class DayThree:
         """
         x_new = x_init + x_step
         y_new = (y_init + y_step) % map_width
-        return [x_new, y_new]
+        return (x_new, y_new)
 
     def traverse(self, x: int, y: int,
                  x_step: int, y_step: int,
-                 maps: List) -> int:
+                 maps: List[str]) -> int:
         depth = len(maps)
         trees = 0
         while x < depth:
@@ -78,14 +78,15 @@ class DayThree:
             x, y = self.stepper(x, y, x_step, y_step, len(maps[0]))
         return trees
 
-    def traverse_multple(self, coords: List, maps: List) -> int:
+    def traverse_multple(self, coords: List[Tuple[int, int]],
+                         maps: List[str]) -> int:
         trees = 1
         for x in coords:
             _tree = self.traverse(0, 0, x[0], x[1], maps)
             trees *= _tree
         return trees
 
-    def answers(self, maps: List):
+    def answers(self, maps: List[str]):
         num_trees = self.traverse(0, 0, 1, 3, maps)
         slope_set = [(1, 1), (1, 3), (1, 5), (1, 7), (2, 1)]
         product_trees = self.traverse_multple(slope_set, maps)
