@@ -6,7 +6,6 @@ Created on Tue Dec  1 17:33:54 2020
 @author: andrewblance
 """
 
-
 import re
 from typing import List
 from dataclasses import dataclass
@@ -65,9 +64,7 @@ class DayThree:
             our new coordinate set
         """
         x_new = x_init + x_step
-        y_new = y_init + y_step
-        if y_new >= map_width:
-            y_new -= map_width
+        y_new = (y_init + y_step) % map_width
         return [x_new, y_new]
 
     def traverse(self, x: int, y: int,
