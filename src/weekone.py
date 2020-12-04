@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 import re
-from typing import List, Tuple
+from typing import List, Tuple, Dict
 from dataclasses import dataclass
 
 
@@ -15,6 +15,95 @@ class bcolors:
     ENDC = '\033[0m'
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
+
+
+@dataclass
+class NorthPolePassPort:
+    ecl: str
+    pid: int
+    eyr: int
+    hcl: str
+    byr: int
+    iyr: int
+    hgt: str
+    cid: int = 0
+
+
+class DayFour:
+    def import_passports(self, loc: str) -> List[Dict]:
+        d = []
+        data = open(loc).read().split("\n\n")
+        for x in data:
+            _d = {}  # type: Dict
+            passport = x.split()
+            for p in passport:
+                key, val = p.split(":")
+                _d[key] = val
+            d.append(_d)
+        return d
+
+    def passport_check_one(self, passports: List[Dict]) -> int:
+        valid = 0
+        requirements = ['byr', 'iyr', 'eyr', 'hgt', 'hcl', 'ecl', 'pid']
+        for passport in passports:
+            if all(a in list(passport.keys()) for a in requirements):
+                valid += 1
+        return valid
+
+    def thorough_check(self, passport: Dict) -> bool:
+        if (int(passport['byr']) < 1920) or (int(passport['byr']) > 2002):
+            return False
+        if (int(passport['iyr']) < 2010) or (int(passport['iyr']) > 2020):
+            return False
+        if (int(passport['eyr']) < 2020) or (int(passport['eyr']) > 2030):
+            return False
+
+        height = int(''.join(filter(str.isdigit, passport['hgt'])))
+        in_cm = str(''.join(filter(str.isalpha, passport['hgt'])))
+        if in_cm == "cm":
+            if (height < 150) or (height > 193):
+                return False
+        if in_cm == "in":
+            if (height < 59) or (height > 76):
+                return False
+        if in_cm not in ["cm", "in"]:
+            return False
+
+        if (len(passport['hcl']) != 7) or (passport['hcl'][0] != "#"):
+            return False
+        if not re.match("^[A-Fa-f0-9_-]*$", passport['hcl'][-6:]):
+            return False
+        eye_colours = ['amb', 'blu', 'brn', 'gry', 'grn', 'hzl', 'oth']
+        if passport['ecl'] not in eye_colours:
+            return False
+        if len(passport['pid']) != 9:
+            return False
+        else:
+            return True
+
+    def thorough_check_batch(self, passports: List[Dict]) -> int:
+        valid = 0
+        requirements = ['byr', 'iyr', 'eyr', 'hgt', 'hcl', 'ecl', 'pid']
+        for passport in passports:
+            if all(a in list(passport.keys()) for a in requirements):
+                valid += self.thorough_check(passport)
+        return valid
+
+    def answers(self, pps: List[Dict]):
+        num_valid = self.passport_check_one(pps)
+        very_valid = self.thorough_check_batch(pps)
+        print(f"{bcolors.OKCYAN}Day Four.{bcolors.ENDC}")
+        print("The number of valid passports if {}".format(str(num_valid)))
+        print("The number of very valid passports if {}"
+              .format(str(very_valid)))
+
+
+@dataclass
+class password:
+    lower: int
+    upper: int
+    rule: str
+    password: str
 
 
 class DayThree:
@@ -209,14 +298,6 @@ class DayTwo:
               .format(str(toboggan_pw)))
 
 
-@dataclass
-class password:
-    lower: int
-    upper: int
-    rule: str
-    password: str
-
-
 class DayOne:
     def import_expense_report(self, loc: str) -> List[int]:
         data = open(loc).read().split()
@@ -262,6 +343,9 @@ def main():
 
     maps = DayThree().import_map("src/data/map.txt")
     DayThree().answers(maps)
+
+    passports = DayFour().import_passports("src/data/passports.txt")
+    DayFour().answers(passports)
 
 
 if __name__ == '__main__':
