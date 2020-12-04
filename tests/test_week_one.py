@@ -9,6 +9,18 @@ Created on Tue Dec  1 16:58:55 2020
 import src.weekone as w1
 
 
+class TestDayFour:
+    def test_passport_checker(self):
+        passports = w1.DayFour().import_passports("tests/passports.txt")
+        valid = w1.DayFour().passport_check_one(passports)
+        assert valid == 2
+
+    def test_very_passport_checker(self):
+        passports = w1.DayFour().import_passports("tests/passports2.txt")
+        valid = w1.DayFour().thorough_check_batch(passports)
+        assert valid == 4
+
+
 class TestDayThree:
     def test_stepper(self):
         x_init = 4
