@@ -18,11 +18,12 @@ class TestDayFive:
         upper = 7
         case_3 = w1.DayFive().search(upper, lower, "RLL")
         assert (case_1 == 70) & (case_2 == 14) & (case_3 == 4)
-        
+
     def test_missing(self):
         L = w1.DayThree().import_map("src/data/boaring_passes.txt")
         miss = w1.DayFive().find_missing(L)
         assert miss == 659
+
 
 class TestDayFour:
     def test_passport_checker(self):
