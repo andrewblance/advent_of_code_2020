@@ -9,6 +9,22 @@ Created on Tue Dec  1 16:58:55 2020
 import src.weekone as w1
 
 
+class TestDayFive:
+    def test_search(self):
+        upper = 127
+        lower = 0
+        case_1 = w1.DayFive().search(upper, lower, "BFFFBBF")
+        case_2 = w1.DayFive().search(upper, lower, "FFFBBBF")
+        upper = 7
+        case_3 = w1.DayFive().search(upper, lower, "RLL")
+        assert (case_1 == 70) & (case_2 == 14) & (case_3 == 4)
+
+    def test_missing(self):
+        L = w1.DayThree().import_map("src/data/boaring_passes.txt")
+        miss = w1.DayFive().find_missing(L)
+        assert miss == 659
+
+
 class TestDayFour:
     def test_passport_checker(self):
         passports = w1.DayFour().import_passports("tests/passports.txt")
