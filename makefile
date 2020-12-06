@@ -16,7 +16,7 @@ lint: venv
 	./$(VENV)/bin/python3 -m flake8 --exclude=venv,docs
 
 mypy: venv
-	./$(VENV)/bin/python3 -m mypy src
+	./$(VENV)/bin/python3 -m mypy src/
 
 test: venv
 	./$(VENV)/bin/python3 -m pytest --ignore=venv,docs
@@ -26,8 +26,8 @@ sphinx: venv
 
 # small run, only runs tests
 small_run: venv
-	./$(VENV)/bin/python3 -m pytest --ignore=venv,docs
-	./$(VENV)/bin/python3 src/weekone.py
+	./$(VENV)/bin/python3 -m pytest --ignore=venv,docs 
+	./$(VENV)/bin/python3 src/weekone.py 
 
 # this is the full run
 # what you should use to do everything

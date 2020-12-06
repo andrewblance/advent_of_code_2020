@@ -18,11 +18,46 @@ class bcolors:
     UNDERLINE = '\033[4m'
 
 
+class DaySix:
+    def import_answers(self, loc: str) -> List[str]:
+        data = open(loc).read().split("\n\n")
+        return data
+
+    def count_uni(self, questions: List[str]) -> int:
+        total = 0
+        for x in questions:
+            split = x.split("\n")
+            str_list = list(filter(None, split))
+            joint = [set(t) for t in str_list]
+            value = set.union(*joint)
+            total += len(value)
+        return total
+
+    def count_int(self, questions: List[str]) -> int:
+        total = 0
+        for x in questions:
+            split = x.split("\n")
+            str_list = list(filter(None, split))
+            sets = [set(t) for t in str_list]
+            intersect = set.intersection(*sets)
+            total += len(intersect)
+        return total
+
+    def answers(self, L: List[str]) -> None:
+        total = self.count_uni(L)
+        inter = self.count_int(L)
+        print(f"{bcolors.BOLD}Day Six.{bcolors.ENDC}")
+        print("The combined number of unique answers is {}"
+              .format(str(total)))
+        print("The combined number of intersected answers is {}"
+              .format(str(inter)))
+
+
 class DayFive:
     def search(self, upper: int, lower: int,
                row: str) -> int:
         """
-        basically a bsp search?
+        basically a binary nums?
         """
         for x in row:
             df = math.ceil((upper-lower)/2)
@@ -457,6 +492,9 @@ def main():
 
     boarding = DayThree().import_map("src/data/boaring_passes.txt")
     DayFive().answers(boarding)
+
+    answers = DaySix().import_answers("src/data/questions_new.txt")
+    DaySix().answers(answers)
 
 
 if __name__ == '__main__':
