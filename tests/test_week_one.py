@@ -9,6 +9,18 @@ Created on Tue Dec  1 16:58:55 2020
 import src.weekone as w1
 
 
+class TestDaySix:
+    def test_group_count(self):
+        answers = ["abc", "a\nb\nc", "ab\nac", "a\na\naa", "b"]
+        total = w1.DaySix().count_uni(answers)
+        assert total == 11
+
+    def test_group_int(self):
+        answers = ["abc", "a\nb\nc", "ab\nac", "a\na\naa", "b"]
+        total = w1.DaySix().count_int(answers)
+        assert total == 6
+
+
 class TestDayFive:
     def test_search(self):
         upper = 127
