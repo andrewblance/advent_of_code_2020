@@ -31,7 +31,8 @@ class DaySeven:
             bag_split = x.split(" contain ")
             bag = bag_split[0].replace(" bags", "")
             rule = bag_split[1].strip('.').split(', ')
-            rules[bag] = [x.replace(' bags', '').replace(' bag', '') for x in rule]
+            rules[bag] = [x.replace(' bags', '')
+                          .replace(' bag', '') for x in rule]
         return rules
 
     def gold_recurs(self, rules: Dict, search: str) -> int:
