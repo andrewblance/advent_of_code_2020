@@ -5,6 +5,8 @@ from typing import List, Tuple, Dict
 from dataclasses import dataclass
 import math
 
+import src.DayEight as d8
+
 
 class bcolors:
     HEADER = '\033[95m'
@@ -55,7 +57,7 @@ class DaySeven:
         D = self.dict_maker(L)
         total = self.gold_recurs(D, "shiny gold")
         beeg_total = self.count_recurs(D, "shiny gold")
-        print(f"{bcolors.UNDERLINE}Day Six.{bcolors.ENDC}")
+        print(f"{bcolors.UNDERLINE}Day Seven.{bcolors.ENDC}")
         print("The number of bags is {}"
               .format(str(total)))
         print("The number of bags i have to carry is {}"
@@ -542,6 +544,9 @@ def main():
 
     bags = DaySeven().import_bags("src/data/bags.txt")
     DaySeven().answers(bags)
+
+    program = d8.DayEight().import_data("src/data/opcode.txt")
+    d8.DayEight().answers(program)
 
 
 if __name__ == '__main__':
