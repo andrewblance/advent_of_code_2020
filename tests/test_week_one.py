@@ -7,6 +7,39 @@ Created on Tue Dec  1 16:58:55 2020
 """
 
 import src.weekone as w1
+import src.DayEight as d8
+
+
+class TestDayEight:
+    def test_loop_stop(self):
+        insts = [["nop", "+0"],
+                 ["acc", "+1"],
+                 ["jmp", "+4"],
+                 ["acc", "+3"],
+                 ["jmp", "-3"],
+                 ["acc", "-99"],
+                 ["acc", "+1"],
+                 ["jmp", "-4"],
+                 ["acc", "+6"]]
+
+        data_tup = [d8.instruction(x[0], int(x[1])) for x in insts]
+        acc, _ = d8.DayEight().processor_run(data_tup)
+        assert acc == 5
+
+    def test_fixer(self):
+        insts = [["nop", "+0"],
+                 ["acc", "+1"],
+                 ["jmp", "+4"],
+                 ["acc", "+3"],
+                 ["jmp", "-3"],
+                 ["acc", "-99"],
+                 ["acc", "+1"],
+                 ["jmp", "-4"],
+                 ["acc", "+6"]]
+
+        data_tup = [d8.instruction(x[0], int(x[1])) for x in insts]
+        acc = d8.DayEight().fix_program(data_tup)
+        assert acc == 8
 
 
 class TestDaySeven:
