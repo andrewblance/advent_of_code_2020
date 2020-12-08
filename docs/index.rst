@@ -20,13 +20,26 @@ Documentation for the Code
 
 Codes pretty fun, right?
 
+Week Two Code
+*************
+.. autoclass:: src.day08.DayEight
+    :members:
+
 Week One Code
 *************
-.. autoclass:: src.weekone.DayThree
+.. autoclass:: src.day07.DaySeven
     :members:
-.. autoclass:: src.weekone.DayTwo
+.. autoclass:: src.day06.DaySix
     :members:
-.. autoclass:: src.weekone.DayOne
+.. autoclass:: src.day05.DayFive
+    :members:
+.. autoclass:: src.day04.DayFour
+    :members:
+.. autoclass:: src.day03.DayThree
+    :members:
+.. autoclass:: src.day02.DayTwo
+    :members:
+.. autoclass:: src.day01.DayOne
     :members:
 
 Indices and tables

@@ -6,8 +6,14 @@ Created on Tue Dec  1 16:58:55 2020
 @author: andrewblance
 """
 
-import src.weekone as w1
-import src.DayEight as d8
+import src.day01 as d1
+import src.day02 as d2
+import src.day03 as d3
+import src.day04 as d4
+import src.day05 as d5
+import src.day06 as d6
+import src.day07 as d7
+import src.day08 as d8
 
 
 class TestDayEight:
@@ -53,8 +59,8 @@ class TestDaySeven:
                  "vibrant plum bags contain 5 faded blue bags.",
                  "faded blue bags contain no other bags.",
                  "dotted black bags contain no other bags."]
-        D = w1.DaySeven().dict_maker(rules)
-        total = w1.DaySeven().gold_recurs(D, "shiny gold")
+        D = d7.DaySeven().dict_maker(rules)
+        total = d7.DaySeven().gold_recurs(D, "shiny gold")
         assert total == 4
 
     def test_count_serch(self):
@@ -65,20 +71,20 @@ class TestDaySeven:
                  "dark green bags contain 2 dark blue bags.",
                  "dark blue bags contain 2 dark violet bags.",
                  "dark violet bags contain no other bags."]
-        D = w1.DaySeven().dict_maker(rules)
-        total = w1.DaySeven().count_recurs(D, "shiny gold")
+        D = d7.DaySeven().dict_maker(rules)
+        total = d7.DaySeven().count_recurs(D, "shiny gold")
         assert total == 126
 
 
 class TestDaySix:
     def test_group_count(self):
         answers = ["abc", "a\nb\nc", "ab\nac", "a\na\naa", "b"]
-        total = w1.DaySix().count_uni(answers)
+        total = d6.DaySix().count_uni(answers)
         assert total == 11
 
     def test_group_int(self):
         answers = ["abc", "a\nb\nc", "ab\nac", "a\na\naa", "b"]
-        total = w1.DaySix().count_int(answers)
+        total = d6.DaySix().count_int(answers)
         assert total == 6
 
 
@@ -86,27 +92,27 @@ class TestDayFive:
     def test_search(self):
         upper = 127
         lower = 0
-        case_1 = w1.DayFive().search(upper, lower, "BFFFBBF")
-        case_2 = w1.DayFive().search(upper, lower, "FFFBBBF")
+        case_1 = d5.DayFive().search(upper, lower, "BFFFBBF")
+        case_2 = d5.DayFive().search(upper, lower, "FFFBBBF")
         upper = 7
-        case_3 = w1.DayFive().search(upper, lower, "RLL")
+        case_3 = d5.DayFive().search(upper, lower, "RLL")
         assert (case_1 == 70) & (case_2 == 14) & (case_3 == 4)
 
     def test_missing(self):
-        L = w1.DayThree().import_map("src/data/boaring_passes.txt")
-        miss = w1.DayFive().find_missing(L)
+        L = d5.DayFive().import_map("src/data/boaring_passes.txt")
+        miss = d5.DayFive().find_missing(L)
         assert miss == 659
 
 
 class TestDayFour:
     def test_passport_checker(self):
-        passports = w1.DayFour().import_passports("tests/passports.txt")
-        valid = w1.DayFour().passport_check_one(passports)
+        passports = d4.DayFour().import_passports("tests/passports.txt")
+        valid = d4.DayFour().passport_check_one(passports)
         assert valid == 2
 
     def test_very_passport_checker(self):
-        passports = w1.DayFour().import_passports("tests/passports2.txt")
-        valid = w1.DayFour().thorough_check_batch(passports)
+        passports = d4.DayFour().import_passports("tests/passports2.txt")
+        valid = d4.DayFour().thorough_check_batch(passports)
         assert valid == 4
 
 
@@ -117,7 +123,7 @@ class TestDayThree:
         x_step = 1
         y_step = 5
         map_width = 11
-        coords = w1.DayThree().stepper(x_init, y_init,
+        coords = d3.DayThree().stepper(x_init, y_init,
                                        x_step, y_step, map_width)
         assert (coords[0] == 5) & (coords[1] == 4)
 
@@ -127,37 +133,37 @@ class TestDayThree:
         y = 0
         x_step = 1
         y_step = 2
-        trees = w1.DayThree().traverse(x, y, x_step, y_step, maps)
+        trees = d3.DayThree().traverse(x, y, x_step, y_step, maps)
         assert trees == 3
 
 
 class TestDayOne:
     def test_two_factors(self):
         L = [1, 5, 20000, 1009, 1011, 2]
-        factors = w1.DayOne().find_two_factors(L)
+        factors = d1.DayOne().find_two_factors(L)
         assert factors == 1020099
 
     def test_three_factors(self):
         L = [1, 5, 20000, 1009, 1010]
-        factors = w1.DayOne().find_three_factors(L)
+        factors = d1.DayOne().find_three_factors(L)
         assert factors == 1019090
 
 
 class TestDayTwo:
     def test_regex(self):
         L = '1-44 d: asdwer'
-        bits = w1.DayTwo().regex_clean(L)
+        bits = d2.DayTwo().regex_clean(L)
         assert (bits[0] == "1") & \
                (bits[1] == "44") & \
                (bits[2] == "d") & \
                (bits[3] == "asdwer")
 
     def test_password_check(self):
-        L = [w1.password(1, 10, "a", "aadd"), w1.password(5, 6, "c", "cca")]
-        bits = w1.DayTwo().password_check(L)
+        L = [d2.password(1, 10, "a", "aadd"), d2.password(5, 6, "c", "cca")]
+        bits = d2.DayTwo().password_check(L)
         assert bits == 1
 
     def test_toboggan_password_check(self):
-        L = [w1.password(1, 4, "a", "aadd"), w1.password(1, 2, "c", "cca")]
-        bits = w1.DayTwo().password_check_toboggan(L)
+        L = [d2.password(1, 4, "a", "aadd"), d2.password(1, 2, "c", "cca")]
+        bits = d2.DayTwo().password_check_toboggan(L)
         assert bits == 1

@@ -27,7 +27,7 @@ sphinx: venv
 # small run, only runs tests
 small_run: venv
 	./$(VENV)/bin/python3 -m pytest --ignore=venv,docs 
-	./$(VENV)/bin/python3 -m src.weekone 
+	./$(VENV)/bin/python3 -m src.main 
 
 # this is the full run
 # what you should use to do everything
@@ -36,7 +36,7 @@ run: venv
 	./$(VENV)/bin/python3 -m pytest --ignore=venv,docs
 	./$(VENV)/bin/python3 -m mypy src
 	make html -C ./docs
-	./$(VENV)/bin/python3 -m src.weekone
+	./$(VENV)/bin/python3 -m src.main
 
 
 clean:
