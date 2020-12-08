@@ -23,10 +23,10 @@ jobs:
     - name: Lint with flake8
       run: |
         # stop the build if there are Python syntax errors or undefined names
-        flake8 --exclude=docs
+        flake8 -m --exclude=docs
     - name: Test with pytest
       run: |
-        pytest --ignore=docs
+        pytest -m --ignore=docs
     - name: Check code types with mypy
       run: |
-        mypy src
+        mypy -m src

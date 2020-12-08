@@ -2,24 +2,13 @@
 # -*- coding: utf-8 -*-
 from typing import List, Tuple
 from dataclasses import dataclass
+from src.utils import bcolors
 
 
 @dataclass
 class instruction:
     inst: str
     code: int
-
-
-class bcolors:
-    HEADER = '\033[95m'
-    OKBLUE = '\033[94m'
-    OKCYAN = '\033[96m'
-    OKGREEN = '\033[92m'
-    WARNING = '\033[93m'
-    FAIL = '\033[91m'
-    ENDC = '\033[0m'
-    BOLD = '\033[1m'
-    UNDERLINE = '\033[4m'
 
 
 class DayEight:
@@ -32,6 +21,15 @@ class DayEight:
         return data_tup
 
     def processor_run(self, program: List[instruction]) -> Tuple[int, bool]:
+        """
+        a little processor
+        acc: add to accumulator
+        jmp: jump
+
+        There can be a 'bug' in the program we recieve
+        if it loops back on itself we have to know
+        this is what idx_flags and loop track
+        """
         idx = 0
         idx_flags = [0]
         acc = 0
@@ -54,6 +52,11 @@ class DayEight:
         return (acc, loop)
 
     def fix_program(self, program: List[instruction]) -> int:
+        """
+        something in our program is wrong
+        it is either a jmp or a nop
+        switch each one around, then run the processor
+        """
         for idx, x in enumerate(program):
             if x.inst == "jmp":
                 program[idx].inst = "nop"
